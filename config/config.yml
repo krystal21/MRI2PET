@@ -1,0 +1,49 @@
+model:
+  model: bert  #vision/gpt/num/bert
+  dataset: HS
+  exp: exp
+  save_dir: test
+  text_embedding: data/HS/LLM/onlyp.npz
+  text_embedding_val: data/HS/LLM/onlyp_b.npz
+  text_embedding_D: data/HS/LLM/onlyp.npz
+  # text_embedding: data/HS/LLM/wp.npz
+  # text_embedding_val: data/HS/LLM/wp_b.npz
+  # text_embedding_D: data/HS/LLM/wp.npz
+
+training:
+  batch_size: 8
+  epochs: 100
+  num_workers: 6
+  seed: 21
+  gpu_id: '0'
+  save_freq: 1
+optimizer:
+  name: Adam
+  lr_G: 5.0e-4
+  lr_D: 1.0e-4
+  momentum: 0.9
+  weight_decay: 1.0e-4
+  b1: 0.5
+  b2: 0.999
+cls:
+  lr: 1.0e-4
+  weight_decay: 5.0e-4
+scheduler:
+  name: CosineAnnealingLR
+  T_max: 100
+  eta_min: 1.0e-7
+
+path:
+  HS:
+    csv_path: data/HS/fold
+    # img_path: /mnt/data/oss_beijing/zhangzhengjie/data/PET/preprocessed/128/
+    img_path: /ailab/user/zhangzhengjie/PET/preprocessed/128_01/
+    # img_path: /mnt/data/oss_beijing/transfers/zhangzhengjie/PET/preprocessed/128_01/
+    
+
+pth_list:
+  - exp/test/drop_v_raw-2024-04-25 15-11/pth/0epoch99.pth
+  - exp/test/drop_v_raw-2024-04-25 15-11/pth/1epoch99.pth
+  - exp/test/drop_v_raw-2024-04-25 15-11/pth/2epoch99.pth
+  - exp/test/drop_v_raw-2024-04-25 15-11/pth/3epoch99.pth
+  - exp/test/drop_v_raw-2024-04-25 15-11/pth/4epoch99.pth
